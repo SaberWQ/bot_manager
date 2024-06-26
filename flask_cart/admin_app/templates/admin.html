@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}
+    Admin page
+{% endblock %}
+
+{% block link %}
+    <link rel="stylesheet" href="{{ url_for('admin.static', filename = 'css/admin.css') }}">
+{% endblock %}
+
+{% block content %}
+<!--  -->
+    <form method="post" class="form" enctype= "multipart/form-data">
+        <input type="file" name="image" accept="image/*">
+
+        <input type= "text" name= "name" placeholder= "name">
+        <textarea name= "description" placeholder= "description"></textarea>
+        <input type= "number" name= "price" placeholder= "price">
+        <input type= "number" name= "count" placeholder= "count">
+        <input type= "number" name= "discount" placeholder= "discount">
+        <button type= "submit">Save</button>
+    </form>
+<!--  -->
+    {% for product in products %}
+    <!--  -->
+        <img src="{{ url_for('shop.static', filename = 'images/' + product.name + '.png') }}" alt="{{ product.name }}">
+        <h3>Змініть зображення товару:</h3>
+        <!-- <input type="file" class="edit-img" id="{{ product.id }}" name="image" accept="image/*"> -->
+        <button class="edit-image" id="{{ product.id }}"> Змінити зображення</button>
+    <!--  -->
+        <h2>Name of Product: {{ product.name }}</h2>
+        <button class="edit-name" id="{{ product.id }}">Змінити назву товару</button>
+    <!--  -->
+        <h3>Price of Product: {{ product.price }}</h3>
+        <button class="edit-price" id="{{ product.id }}">Змінити ціну товару</button>
+    <!--  -->
+        <form method="post" class="form">
+            <button value="{{ product.id }}" name="del" type="submit" id="{{ product.id }}">DELETE</button>
+        </form>
+        <hr>
+    {% endfor %}
+
+    <div class= "modal-window" style="display: none;">
+        <form method="post" enctype="multipart/form-data" class="modal-form">
+            <input type="" name="" accept="" class="input-data" placeholder="">
+            <button type="submit" name="submit-change" class="submit-change" value="">SEND</button>
+        </form>
+    </div>
+    <script src="{{ url_for('admin.static', filename = 'js/editData.js') }}"></script>
+{% endblock %}

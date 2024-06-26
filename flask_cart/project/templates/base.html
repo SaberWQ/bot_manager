@@ -1,0 +1,34 @@
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            {% block title %} 
+        
+            {% endblock %}
+        </title>
+        {% block link %}
+        
+        {% endblock %}
+    </head>
+    <body>
+        <a href= "/">Home</a>
+        <a href= "/shop/">Shop</a>
+        <a href= "/cart/">Cart</a>
+
+        {% if is_admin %}
+            <a href="/admin/">Admin</a>
+        {% endif %}
+
+        {% if is_authenticated %}
+            <h2>{{ user_name }}</h2>
+        {% else %}
+            <a href="/registration/">Registration</a>
+            <a href="/login/">login</a>
+        {% endif %}
+
+        {% block content %}
+    
+        {% endblock %}
+    </body>
+</html>

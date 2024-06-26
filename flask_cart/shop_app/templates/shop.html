@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %} 
+    Shop page
+{% endblock %}
+
+{% block content %}
+    {% for product in products %}
+    <!--  -->
+        <img src="{{ url_for('shop.static', filename = 'images/' + product.name + '.png') }}" alt="{{ product.name }}">
+        <h1>Product Name: {{ product.name }}</h1>
+        <h2>Product price: {{ product.price }}</h2>
+        <h3>Product count: {{ product.count }}</h3>
+        <p>Product description: {{ product.description }}</p>
+        <p>Product Discount: {{ product.discount }}</p>
+        <button class= "buy" id= "{{ product.id }}"> Buy {{ product.id }}</button>
+    {% endfor %}
+    <script defer src="{{ url_for('shop.static', filename='js/write_cookies.js') }}"></script>
+{% endblock %}
